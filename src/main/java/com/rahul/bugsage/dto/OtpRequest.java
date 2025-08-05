@@ -1,6 +1,7 @@
 package com.rahul.bugsage.dto;
 
 import jakarta.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OtpRequest {
+
 	@NotBlank
-	private String email;
+	private String contact;
 	
 	@NotBlank
-	private String otp;
+	private String type;;
 }

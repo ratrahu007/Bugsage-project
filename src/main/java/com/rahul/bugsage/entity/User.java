@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,7 +30,7 @@ public class User {
 	@Column(unique = true,nullable=false)
 	private String username;
 	
-	@Column(unique = true,nullable=false)
+	@Column(unique = true)
 	private String email;
 	
 	
@@ -44,10 +46,8 @@ public class User {
 	private boolean enabled=true;
 	
 	private boolean emailVerified = false;
-	
-	private String otp;
-	
-	private Long otpExpirytime;
-	
+	@OneToOne
+	@JoinColumn(name ="otp_id")
+	private Otpdata otpData;
 	
 }

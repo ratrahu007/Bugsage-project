@@ -19,7 +19,7 @@ public class RegisterRequest {
 	private String username;
 	
 	@Email(message="Invalid email Format")
-	@NotBlank(message="Email is required")
+	
 	private String email;
 	
 	
