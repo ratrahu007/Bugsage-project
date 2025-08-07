@@ -10,4 +10,6 @@ public interface OtpDataRepository extends JpaRepository<Otpdata,Long>{
 	Optional<Otpdata> findByContactAndOtpAndVerifiedFalse(String contact, String otp);
 	
     Optional<Otpdata> findTopByContactAndOtpAndTypeOrderByIdDesc(String contact, String otp, String type);
+    
+    Optional<Otpdata> findFirstByContactAndVerified(String contact, boolean verified);
 }

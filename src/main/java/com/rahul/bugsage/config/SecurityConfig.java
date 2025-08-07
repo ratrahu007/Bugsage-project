@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/api/otp/send",
                     "/api/otp/verify",
-                    "/api/otp/test"
+                    "/api/otp/test",
+                    "api/auth/register"
                      // ✅ allow hello test
                 ).permitAll() // ✅ public routes
                 .anyRequest().authenticated() // 🔐 everything else is secured

@@ -43,9 +43,7 @@ public class User {
 	
 	private String role;
 	
-	private boolean enabled=true;
 	
-	private boolean emailVerified = false;
 	@OneToOne
 	@JoinColumn(name ="otp_id")
 	private Otpdata otpData;
