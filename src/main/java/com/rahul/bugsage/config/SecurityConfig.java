@@ -12,9 +12,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * This class configures Spring Security for the application,
+ * setting up authentication and authorization rules, as well as JWT handling.
+ */
 @Configuration
 public class SecurityConfig {
 
+    // These fields are autowired, but their respective beans must be defined
+    // elsewhere in your project (e.g., a JwtAuthenticationFilter and
+    // JwtAuthenticationEntryPoint class).
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -36,6 +43,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+                // Allow specific public endpoints to be accessed without authentication
                 .requestMatchers(
                     "/api/otp/send",
                     "/api/otp/verify",
@@ -43,16 +51,20 @@ public class SecurityConfig {
                     "/api/auth/register",
                     "/api/auth/login",
                     "/api/auth/hello",
-                    "/api/debug/**"
+                    "/api/bug/**"
                 ).permitAll()
+                // All other requests must be authenticated
                 .anyRequest().authenticated()
             )
             .exceptionHandling(ex -> ex
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // 🔐 EntryPoint for 401
+                // Set custom entry point for handling authentication errors (401)
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
             )
             .sessionManagement(session -> session
+                // Use stateless sessions as we are using JWT
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
+            // Add the custom JWT filter before the standard authentication filter
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

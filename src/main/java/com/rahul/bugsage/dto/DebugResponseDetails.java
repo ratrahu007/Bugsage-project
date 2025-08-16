@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DebugResponse {
-    private String solution;
-    private String suggestions;
-    @JsonProperty("visual_details")
-    private DebugResponseDetails visualDetails;
+public class DebugResponseDetails {
+    @JsonProperty("line_number")
+    private int lineNumber;
+    private String summary;
 }
